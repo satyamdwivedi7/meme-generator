@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import memesData from "../components/MemesData.jsx";
 
 export default function Meme() {
   const [memeImage, setMemeImage] = React.useState("");
-  function getMemeImage() {
+  async function getMemeImage() {
     if (meme.topText === "" && meme.bottomText === "") {
       document.querySelector(".error").textContent =
         "Please enter text in at least one of the input boxes";
       return;
     }
     document.querySelector(".error").textContent = "";
-    const memesArray = allMemeImages.data.memes;
-    const randomNumber = Math.floor(Math.random() * memesArray.length);
-    const url = memesArray[randomNumber].url;
-    setMeme((prevMeme) => ({
-      ...prevMeme,
-      randomImage: url,
-    }));
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch("https://random-meme-api.vercel.app/", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        let data = JSON.parse(result).data;
+        setMeme((prevMeme) => ({
+          ...prevMeme,
+          randomImage: data.url,
+        }));
+      })
+      .catch((error) => {
+        document.querySelector(".error").textContent = error.message;
+      });
   }
+
+  useEffect(() => {
+    getMemeImage();
+  }, []);
+
   const [meme, setMeme] = React.useState({
     topText: "",
     bottomText: "",
@@ -71,12 +85,14 @@ export default function Meme() {
       </div>
       <p className="error"></p>
       <div className="meme">
-        <img src={meme.randomImage} className="meme-image" />
+        <img
+          src={meme.randomImage}
+          className="meme-image"
+          alt="Internet connection required"
+        />
         <h2 className="meme-text top">{meme.topText}</h2>
         <h2 className="meme-text bottom">{meme.bottomText}</h2>
       </div>
     </main>
   );
 }
-
-// do some error handling in the code
