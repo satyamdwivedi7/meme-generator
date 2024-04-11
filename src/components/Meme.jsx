@@ -4,6 +4,12 @@ import memesData from "../components/MemesData.jsx";
 export default function Meme() {
   const [memeImage, setMemeImage] = React.useState("");
   function getMemeImage() {
+    if (meme.topText === "" && meme.bottomText === "") {
+      document.querySelector(".error").textContent =
+        "Please enter text in at least one of the input boxes";
+      return;
+    }
+    document.querySelector(".error").textContent = "";
     const memesArray = allMemeImages.data.memes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
     const url = memesArray[randomNumber].url;
@@ -21,6 +27,7 @@ export default function Meme() {
   const [allMemeImages, setAllMemeImages] = React.useState(memesData);
 
   function handleChange(event) {
+    document.querySelector(".error").textContent = "";
     const { name, value } = event.target;
     setMeme((prevMeme) => {
       return {
@@ -62,6 +69,7 @@ export default function Meme() {
           Get a new meme image 🖼
         </button>
       </div>
+      <p className="error"></p>
       <div className="meme">
         <img src={meme.randomImage} className="meme-image" />
         <h2 className="meme-text top">{meme.topText}</h2>
@@ -70,3 +78,5 @@ export default function Meme() {
     </main>
   );
 }
+
+// do some error handling in the code
