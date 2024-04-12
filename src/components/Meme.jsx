@@ -53,7 +53,6 @@ export default function Meme() {
   return (
     <main>
       <div className="form">
-        <div>
           <label>
             Top Text
             <input
@@ -65,8 +64,6 @@ export default function Meme() {
               onChange={handleChange}
             />
           </label>
-        </div>
-        <div>
           <label>
             Bottom Text
             <input
@@ -78,8 +75,7 @@ export default function Meme() {
               onChange={handleChange}
             />
           </label>
-        </div>
-        <button className="form-button" onClick={getMemeImage}>
+        <button className="btn btn-primary form-button" onClick={getMemeImage}>
           Get a new meme image 🖼
         </button>
       </div>
