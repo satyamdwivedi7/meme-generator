@@ -1,4 +1,4 @@
-import logo from "../images/troll-face.png";
+import logo from "/troll-face.png";
 export default function Header() {
   return (
     <nav class="navbar header">
