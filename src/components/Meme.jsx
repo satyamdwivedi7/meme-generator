@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import memesData from "../components/MemesData.jsx";
 
 export default function Meme() {
   const [memeImage, setMemeImage] = React.useState("");
@@ -38,8 +37,6 @@ export default function Meme() {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
 
-  const [allMemeImages, setAllMemeImages] = React.useState(memesData);
-
   function handleChange(event) {
     document.querySelector(".error").textContent = "";
     const { name, value } = event.target;
@@ -53,28 +50,28 @@ export default function Meme() {
   return (
     <main>
       <div className="form">
-          <label>
-            Top Text
-            <input
-              type="text"
-              placeholder="Shut up"
-              className="form-input"
-              name="topText"
-              value={meme.topText}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Bottom Text
-            <input
-              type="text"
-              placeholder="and take my money"
-              className="form-input"
-              name="bottomText"
-              value={meme.bottomText}
-              onChange={handleChange}
-            />
-          </label>
+        <label>
+          Top Text
+          <input
+            type="text"
+            placeholder="Shut up"
+            className="form-input"
+            name="topText"
+            value={meme.topText}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Bottom Text
+          <input
+            type="text"
+            placeholder="and take my money"
+            className="form-input"
+            name="bottomText"
+            value={meme.bottomText}
+            onChange={handleChange}
+          />
+        </label>
         <button className="btn btn-primary form-button" onClick={getMemeImage}>
           Get a new meme image 🖼
         </button>
